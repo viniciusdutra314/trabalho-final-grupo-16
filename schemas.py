@@ -1,17 +1,25 @@
-import sqlalchemy as sa
+from sqlalchemy import String, Date, Integer, UniqueConstraint
 from sqlalchemy.dialects import postgresql
-from typing import Optional
 from sqlalchemy.schema import CreateTable
-from sqlalchemy.orm import DeclarativeBase,Mapped,mapped_column
+from sqlalchemy.orm import DeclarativeBase,MappedAsDataclass, mapped_column,Mapped
+import datetime
 
-class Database(DeclarativeBase):
+class Database(MappedAsDataclass,DeclarativeBase):
     pass
 
-class Curso(Database):
-    __tablename__ = "curso"
-    id : Mapped[int] = mapped_column(primary_key=True)
-    nome: Mapped[str] = mapped_column(sa.String(100))
-    nickname: Mapped[Optional[str]] = mapped_column(sa.String(50))
-
-for table in Database.metadata.sorted_tables:
-    print(CreateTable(table).compile(dialect=postgresql.dialect()))
+class Usuário(Database):
+    __tablename__ = 'usuario'
+    id:Mapped[int] = mapped_column(Integer,primary_key=True)
+    nome:Mapped[str] = mapped_column(String,nullable=False)
+    sobrenome:Mapped[str]=mapped_column(String,nullable=False)
+    data_de_nascimento:Mapped[datetime.date] = mapped_column(Date,nullable=False)
+    endereço:Mapped[str] = mapped_column(String,nullable=False)
+    sexo:Mapped[str] = mapped_column(String(1),nullable=False)
+    numero_de_telefone:Mapped[str] = mapped_column(String(15),nullable=False)
+    email:Mapped[str]= mapped_column(String,nullable=False) 
+    senha:Mapped[str]= mapped_column(String,nullable=False)
+    
+    __table_args__ = (
+        UniqueConstraint('nome', 'sobrenome', 'numero_de_telefone', 
+                        name='unicidade_nome_sobrenome_telefone'),
+    )
