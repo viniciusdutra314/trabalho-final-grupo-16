@@ -1,7 +1,8 @@
-from sqlalchemy import String, Date, Integer, UniqueConstraint
-from sqlalchemy.orm import DeclarativeBase,MappedAsDataclass, mapped_column,Mapped
-from sqlalchemy.schema import Index
 import datetime
+
+from sqlalchemy import Date, Integer, String, UniqueConstraint
+from sqlalchemy.orm import DeclarativeBase, Mapped, MappedAsDataclass, mapped_column
+
 
 class Database(MappedAsDataclass,DeclarativeBase):
     pass
