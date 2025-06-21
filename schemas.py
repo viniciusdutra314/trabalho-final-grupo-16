@@ -1,7 +1,6 @@
 from sqlalchemy import String, Date, Integer, UniqueConstraint
-from sqlalchemy.dialects import postgresql
-from sqlalchemy.schema import CreateTable
 from sqlalchemy.orm import DeclarativeBase,MappedAsDataclass, mapped_column,Mapped
+from sqlalchemy.schema import Index
 import datetime
 
 class Database(MappedAsDataclass,DeclarativeBase):
@@ -23,3 +22,4 @@ class Usuário(Database):
         UniqueConstraint('nome', 'sobrenome', 'numero_de_telefone', 
                         name='unicidade_nome_sobrenome_telefone'),
     )
+

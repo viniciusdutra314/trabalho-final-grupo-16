@@ -1,25 +1,18 @@
 from schemas import *
 import random 
+from sqlalchemy import create_engine,text,select
+from sqlalchemy.orm import Session
 from faker import Faker
-import itertools
+from time import time
 
-def take(n, generator):
-    return [next(generator()) for _ in range(n)]
-
-
-def fake_usuário_generator() -> Usuário:
+def generate_fake_usuários(num_usuarios: int) -> list[Usuário]:
     fake=Faker(locale='pt_BR')
-    id=0
-    while True:
-        id+=1
+    usuarios:list[Usuário]=[]
+    for id in range(num_usuarios):
         sexo = random.choice(['M', 'F'])
-        if sexo == 'M':
-            nome = fake.first_name_male()
-            sobrenome =fake.last_name_male()
-        else:
-            nome = fake.first_name_female()
-            sobrenome = fake.last_name_female()
-        yield Usuário(
+        nome = fake.first_name_male() if sexo == 'M' else fake.first_name_female()
+        sobrenome=fake.last_name()
+        usuarios.append(Usuário(
             id=id,
             nome=nome,
             sobrenome=sobrenome,
@@ -29,7 +22,27 @@ def fake_usuário_generator() -> Usuário:
             numero_de_telefone=fake.phone_number(),
             email=fake.email(),
             senha=fake.password()
-        )
+        ))
+    return usuarios
 
-for x in take(10,fake_usuário_generator):
-    print(x)
+engine=create_engine('sqlite:///database.db')
+Database.metadata.create_all(engine)
+
+with Session(engine) as session:
+    session.add_all(generate_fake_usuários(100_000))
+    session.commit()
+    
+    
+    time_start = time()
+    session.execute(text("SELECT MAX(data_de_nascimento) FROM usuario"))
+    time_no_index = 1000*(time() - time_start)
+    
+    session.execute(text("CREATE INDEX idx_data_nascimento ON usuario (data_de_nascimento)"))
+    session.commit()
+    
+    time_start = time()
+    session.execute(text("SELECT MAX(data_de_nascimento) FROM usuario"))
+    time_with_index = 1000*(time() - time_start)
+    print(f"{time_no_index=:.2f} (ms), {time_with_index=:.2f} (ms), speedup= {time_no_index / time_with_index:.2f}")
+    
+    
