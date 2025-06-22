@@ -1,4 +1,25 @@
-import random
+import json
+import dataclasses
+
+
+
+with open ("matrusp_backend/jupiter_web.json","r") as file:
+    matrusp=json.load(file)
+    for disciplina in matrusp:
+        curso= disciplina["unidade"]
+        codigo= str(disciplina["codigo"])
+        qtd_aulas_semanais=len(disciplina["turmas"][0]["horario"])
+        #material_didatico tá faltando
+        professores_diferentes:set[str]=set()
+        for turma in disciplina["turmas"]:
+            for horario in turma["horario"]:
+                for professor in horario["professores"]:
+                    professores_diferentes.add(professor.split("(R)")[-1].rstrip())
+        professores=list(professores_diferentes)
+        print(f"{curso=},{codigo=},{qtd_aulas_semanais=},{professores_diferentes=}")
+
+
+""" import random
 from time import time
 
 from faker import Faker
@@ -53,3 +74,4 @@ with Session(engine) as session:
     print(
         f"{time_no_index=:.2f} (ms), {time_with_index=:.2f} (ms), speedup= {time_no_index / time_with_index:.2f}"
     )
+ """
