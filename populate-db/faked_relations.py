@@ -107,13 +107,17 @@ def fake_mensagem_destinatario(mensagens:List[Mensagem]) -> List[MensagemDestina
     return destinatarios
 
 def fake_sala(unidades_escolas:list[UnidadeEscola],N:int) -> List[Sala]:
-    return [Sala(
-        id=i+1,
-        unidade_escola=str(random.choice(unidades_escolas).id_unidade),
-        numero=i+1,
-        capacidade=faker.random_int(min=30, max=100)
-    ) for i in range(N)]
-
+    salas:list[Sala] = []
+    id=0
+    for _ in range(N):
+        id+=1
+        salas.append(Sala(
+            id=id,
+            unidade_escola=str(random.choice(unidades_escolas).id_unidade),
+            numero=id,
+            capacidade=faker.random_int(min=30, max=100)
+            ))
+    return salas
 def fake_curso(unidade_escola:list[UnidadeEscola],
                departamentos_academicos:list[DepartamentoAcademico]) -> List[Curso]:
     return [Curso(
@@ -220,18 +224,22 @@ def fake_turma(disciplinas:list[Disciplina], salas:list[Sala],N: int = 10) -> Li
                                 sala_id=sala.id))
     return turmas
 
-def fake_avaliacao(N: int = 10) -> List[Avaliação]:
-    return [Avaliação(
-        id=i+1,
-        aluno_id=random.randint(1, 10),
-        disciplina_id=random.randint(1, 10),
-        comentario=faker.sentence(),
-        nota_didatica=faker.random_int(min=0, max=10),
-        nota_material_de_apoio=faker.random_int(min=0, max=10),
-        nota_relevancia_do_conteudo=faker.random_int(min=0, max=10),
-        nota_infraestutura=faker.random_int(min=0, max=10)
-    ) for i in range(N)]
-
+def fake_avaliacao(alunos:list[Aluno],disciplinas:list[Disciplina]) -> List[Avaliação]:
+    avaliacoes: List[Avaliação] = []
+    for i,aluno in enumerate(alunos):
+        avaliacoes.append(Avaliação(
+            id=i+1,
+            aluno_id=aluno.usuario_id,
+            disciplina_id=random.choice(disciplinas).id,
+            comentario=faker.sentence(),
+            nota_didatica=faker.random_int(min=0, max=10),
+            nota_material_de_apoio=faker.random_int(min=0, max=10),
+            nota_relevancia_do_conteudo=faker.random_int(min=0, max=10),
+            nota_infraestutura=faker.random_int(min=0, max=10)
+            )
+        )
+    return avaliacoes
+    
 def fake_matricula(alunos:list[Aluno]) -> List[Matricula]:
     matriculas: List[Matricula] = []
     i=1

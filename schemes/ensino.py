@@ -7,7 +7,7 @@ class Sala(Database):
     unidade_escola: Mapped[str] = mapped_column(
         Integer,ForeignKey(UnidadeEscola.id_unidade)
     )
-    numero:Mapped[int]=mapped_column(Integer)
+    numero:Mapped[int]=mapped_column(Integer,nullable=False)
     capacidade:Mapped[int]=mapped_column(Integer,nullable=False)
     __table_args__=(
         UniqueConstraint(

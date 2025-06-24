@@ -14,9 +14,9 @@ with open("scripts-sql/populate.sql", "w") as sqlfile:
     insert_objects.append(professores:=fake_professor(usuarios))
     insert_objects.append(alunos:=fake_aluno(usuarios))
     insert_objects.append(funcionarios_administrativos:=fake_funcionario_administrativo(usuarios))
-
     insert_objects.append(departamentos_academicos:=fake_departamento_academico(professores))
-    insert_objects.append(salas:=fake_sala(unidades_escolas,len(unidades_escolas))*30)
+    num_salas= len(unidades_escolas) * 30
+    insert_objects.append(salas:=fake_sala(unidades_escolas,num_salas))
     insert_objects.append(cursos:=fake_curso(unidades_escolas, departamentos_academicos))
     insert_objects.append(disciplinas:=fake_disciplina(unidades_escolas,len(unidades_escolas)*10))
 
@@ -25,7 +25,7 @@ with open("scripts-sql/populate.sql", "w") as sqlfile:
     insert_objects.append(mensagem_destinatarios:=fake_mensagem_destinatario(mensagens))
     insert_objects.append(professores_responsaveis:=fake_disciplina_professores_responsaveis(disciplinas, professores))
     insert_objects.append(turmas:=fake_turma(disciplinas,salas))
-    insert_objects.append(avaliações:=fake_avaliacao())
+    insert_objects.append(avaliações:=fake_avaliacao(alunos,disciplinas))
     insert_objects.append(matriculas:=fake_matricula(alunos))
     insert_objects.append(matricula_disciplinas:=fake_matricula_disciplina(matriculas,disciplinas))
     insert_objects.append(notas:=fake_notas(matricula_disciplinas))

@@ -197,23 +197,14 @@ CREATE TABLE disciplina_professor (
 
 ;
 
-CREATE TABLE matricula_turma (
+CREATE TABLE matricula_disciplina (
+	id SERIAL NOT NULL, 
 	id_matricula INTEGER NOT NULL, 
 	id_disciplina INTEGER NOT NULL, 
-	PRIMARY KEY (id_matricula, id_disciplina), 
+	PRIMARY KEY (id), 
+	UNIQUE (id_matricula, id_disciplina), 
 	FOREIGN KEY(id_matricula) REFERENCES matricula (id_matricula), 
 	FOREIGN KEY(id_disciplina) REFERENCES disciplina (id)
-)
-
-;
-
-CREATE TABLE notas (
-	disciplina_id INTEGER NOT NULL, 
-	matricula_id INTEGER NOT NULL, 
-	nota FLOAT NOT NULL, 
-	PRIMARY KEY (disciplina_id, matricula_id), 
-	FOREIGN KEY(disciplina_id) REFERENCES disciplina (id), 
-	FOREIGN KEY(matricula_id) REFERENCES matricula (id_matricula)
 )
 
 ;
@@ -257,6 +248,15 @@ CREATE TABLE curso_requisitos (
 	PRIMARY KEY (id_curso, id_curso_requisito), 
 	FOREIGN KEY(id_curso) REFERENCES curso (id), 
 	FOREIGN KEY(id_curso_requisito) REFERENCES curso (id)
+)
+
+;
+
+CREATE TABLE notas (
+	id_matricula_disciplina INTEGER NOT NULL, 
+	nota FLOAT NOT NULL, 
+	PRIMARY KEY (id_matricula_disciplina), 
+	FOREIGN KEY(id_matricula_disciplina) REFERENCES matricula_disciplina (id)
 )
 
 ;
