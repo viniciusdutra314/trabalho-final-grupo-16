@@ -6,6 +6,7 @@ CREATE TABLE aviso (
 	PRIMARY KEY (id)
 )
 
+;
 
 CREATE TABLE infraestrutura (
 	id SERIAL NOT NULL, 
@@ -13,6 +14,7 @@ CREATE TABLE infraestrutura (
 	PRIMARY KEY (id)
 )
 
+;
 
 CREATE TABLE regras (
 	id SERIAL NOT NULL, 
@@ -20,6 +22,7 @@ CREATE TABLE regras (
 	PRIMARY KEY (id)
 )
 
+;
 
 CREATE TABLE unidade_escola (
 	id_unidade SERIAL NOT NULL, 
@@ -31,6 +34,7 @@ CREATE TABLE unidade_escola (
 	PRIMARY KEY (id_unidade)
 )
 
+;
 
 CREATE TABLE usuario (
 	id SERIAL NOT NULL, 
@@ -39,14 +43,15 @@ CREATE TABLE usuario (
 	data_de_nascimento DATE NOT NULL, 
 	"endereço" VARCHAR NOT NULL, 
 	sexo VARCHAR(1) NOT NULL, 
-	numero_de_telefone VARCHAR(15) NOT NULL, 
+	numero_de_telefone VARCHAR NOT NULL, 
 	email VARCHAR NOT NULL, 
 	senha VARCHAR NOT NULL, 
-	tipo_usuario tiposusuarioenum NOT NULL, 
+	tipo_usuario VARCHAR NOT NULL, 
 	PRIMARY KEY (id), 
 	CONSTRAINT unicidade_nome_sobrenome_telefone UNIQUE (nome, sobrenome, numero_de_telefone)
 )
 
+;
 
 CREATE TABLE aluno (
 	usuario_id INTEGER NOT NULL, 
@@ -56,6 +61,7 @@ CREATE TABLE aluno (
 	FOREIGN KEY(unidade_escola) REFERENCES unidade_escola (id_unidade)
 )
 
+;
 
 CREATE TABLE funcionario_administrativo (
 	usuario_id INTEGER NOT NULL, 
@@ -63,6 +69,7 @@ CREATE TABLE funcionario_administrativo (
 	FOREIGN KEY(usuario_id) REFERENCES usuario (id)
 )
 
+;
 
 CREATE TABLE mensagem (
 	id SERIAL NOT NULL, 
@@ -73,6 +80,7 @@ CREATE TABLE mensagem (
 	FOREIGN KEY(remetente_id) REFERENCES usuario (id)
 )
 
+;
 
 CREATE TABLE professor (
 	id INTEGER NOT NULL, 
@@ -84,6 +92,7 @@ CREATE TABLE professor (
 	FOREIGN KEY(unidade_escola) REFERENCES unidade_escola (id_unidade)
 )
 
+;
 
 CREATE TABLE sala (
 	id SERIAL NOT NULL, 
@@ -95,6 +104,7 @@ CREATE TABLE sala (
 	FOREIGN KEY(unidade_escola) REFERENCES unidade_escola (id_unidade)
 )
 
+;
 
 CREATE TABLE departamento_academico (
 	codigo SERIAL NOT NULL, 
@@ -104,6 +114,7 @@ CREATE TABLE departamento_academico (
 	FOREIGN KEY(chefe_id) REFERENCES professor (id)
 )
 
+;
 
 CREATE TABLE disciplina (
 	unidade_escola INTEGER NOT NULL, 
@@ -116,18 +127,20 @@ CREATE TABLE disciplina (
 	FOREIGN KEY(sala) REFERENCES sala (id)
 )
 
+;
 
 CREATE TABLE matricula (
 	id_matricula SERIAL NOT NULL, 
 	id_aluno INTEGER NOT NULL, 
 	data_efetivacao DATE NOT NULL, 
-	status_matricula statusmatriculaenum NOT NULL, 
+	status_matricula VARCHAR NOT NULL, 
 	bolsa_ou_desconto FLOAT NOT NULL, 
 	data_limite DATE NOT NULL, 
 	PRIMARY KEY (id_matricula), 
 	FOREIGN KEY(id_aluno) REFERENCES aluno (usuario_id)
 )
 
+;
 
 CREATE TABLE mensagem_destinatario (
 	mensagem_id INTEGER NOT NULL, 
@@ -137,6 +150,7 @@ CREATE TABLE mensagem_destinatario (
 	FOREIGN KEY(destinatario_id) REFERENCES usuario (id)
 )
 
+;
 
 CREATE TABLE avaliacao (
 	id SERIAL NOT NULL, 
@@ -152,6 +166,7 @@ CREATE TABLE avaliacao (
 	FOREIGN KEY(disciplina_id) REFERENCES disciplina (id)
 )
 
+;
 
 CREATE TABLE curso (
 	id SERIAL NOT NULL, 
@@ -159,7 +174,7 @@ CREATE TABLE curso (
 	codigo VARCHAR NOT NULL, 
 	nome VARCHAR NOT NULL, 
 	departamento_academico INTEGER NOT NULL, 
-	nivel_ensino nivelensinoenum NOT NULL, 
+	nivel_ensino VARCHAR NOT NULL, 
 	carga_horaria_total INTEGER NOT NULL, 
 	numero_vagas INTEGER NOT NULL, 
 	ementa VARCHAR NOT NULL, 
@@ -170,6 +185,7 @@ CREATE TABLE curso (
 	FOREIGN KEY(sala) REFERENCES sala (id)
 )
 
+;
 
 CREATE TABLE disciplina_professor (
 	id_disciplina INTEGER NOT NULL, 
@@ -179,6 +195,7 @@ CREATE TABLE disciplina_professor (
 	FOREIGN KEY(professor_id) REFERENCES professor (id)
 )
 
+;
 
 CREATE TABLE matricula_turma (
 	id_matricula INTEGER NOT NULL, 
@@ -188,6 +205,7 @@ CREATE TABLE matricula_turma (
 	FOREIGN KEY(id_disciplina) REFERENCES disciplina (id)
 )
 
+;
 
 CREATE TABLE notas (
 	disciplina_id INTEGER NOT NULL, 
@@ -198,6 +216,7 @@ CREATE TABLE notas (
 	FOREIGN KEY(matricula_id) REFERENCES matricula (id_matricula)
 )
 
+;
 
 CREATE TABLE turma (
 	id SERIAL NOT NULL, 
@@ -210,6 +229,7 @@ CREATE TABLE turma (
 	FOREIGN KEY(sala_id) REFERENCES sala (id)
 )
 
+;
 
 CREATE TABLE curso_disciplina_requerida (
 	id_curso INTEGER NOT NULL, 
@@ -219,6 +239,7 @@ CREATE TABLE curso_disciplina_requerida (
 	FOREIGN KEY(id_disciplina) REFERENCES disciplina (id)
 )
 
+;
 
 CREATE TABLE curso_requer_infraestrutura (
 	id_curso INTEGER NOT NULL, 
@@ -228,6 +249,7 @@ CREATE TABLE curso_requer_infraestrutura (
 	FOREIGN KEY(id_infraestrutura) REFERENCES infraestrutura (id)
 )
 
+;
 
 CREATE TABLE curso_requisitos (
 	id_curso INTEGER NOT NULL, 
@@ -237,6 +259,7 @@ CREATE TABLE curso_requisitos (
 	FOREIGN KEY(id_curso_requisito) REFERENCES curso (id)
 )
 
+;
 
 CREATE TABLE regras_curso (
 	id_regra INTEGER NOT NULL, 
@@ -246,3 +269,4 @@ CREATE TABLE regras_curso (
 	FOREIGN KEY(codigo_curso) REFERENCES curso (id)
 )
 
+;

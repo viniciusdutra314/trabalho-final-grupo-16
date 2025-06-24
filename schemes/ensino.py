@@ -36,7 +36,7 @@ class Curso(Database):
         Graduacao = "Graduação"
 
     nivel_ensino:Mapped[NivelEnsinoEnum] = mapped_column(
-        Enum(NivelEnsinoEnum), nullable=False
+        String, nullable=False
     )
     carga_horaria_total:Mapped[int] = mapped_column(Integer, nullable=False)
     numero_vagas:Mapped[int] = mapped_column(Integer, nullable=False)
@@ -115,7 +115,7 @@ class Usuário(Database):
     data_de_nascimento: Mapped[datetime.date] = mapped_column(Date, nullable=False)
     endereço: Mapped[str] = mapped_column(String, nullable=False)
     sexo: Mapped[str] = mapped_column(String(1), nullable=False)
-    numero_de_telefone: Mapped[str] = mapped_column(String(15), nullable=False)
+    numero_de_telefone: Mapped[str] = mapped_column(String, nullable=False)
     email: Mapped[str] = mapped_column(String, nullable=False)
     senha: Mapped[str] = mapped_column(String, nullable=False)
     ##isso deve ser usado por um trigger de verificação
@@ -125,7 +125,7 @@ class Usuário(Database):
         FuncionarioAdministrativo = "Funcionário Administrativo"
 
     tipo_usuario: Mapped[TiposUsuarioEnum] = mapped_column(
-        Enum(TiposUsuarioEnum), nullable=False
+        String, nullable=False
     )
     __table_args__ = (
         UniqueConstraint(
@@ -203,7 +203,7 @@ class Matricula(Database):
         Reprovada = "Reprovada"
         Cancelada = "Cancelada"
     
-    status_matricula:Mapped[StatusMatriculaEnum]=mapped_column(Enum(StatusMatriculaEnum),nullable=False)
+    status_matricula:Mapped[StatusMatriculaEnum]=mapped_column(String,nullable=False)
     bolsa_ou_desconto:Mapped[float]=mapped_column(Float,nullable=False)
     data_limite:Mapped[datetime.date]=mapped_column(Date,nullable=False)
     

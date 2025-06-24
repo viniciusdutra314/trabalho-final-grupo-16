@@ -7,14 +7,15 @@ from schemes.comunicacao import *
 from sqlalchemy.schema import CreateTable,CreateIndex
 from sqlalchemy.dialects import postgresql
 from sqlalchemy import Index, text
-from schemes.ensino import Usuário, Matricula
+from schemes.ensino import Usuário, Matricula, Curso
 
-used_dialect=postgresql.dialect()
+used_dialect = postgresql.dialect()
+
 
 with open("scripts-sql/generated_schema.sql", "w") as file:
     for table in Database.metadata.sorted_tables:
         file.write(str(CreateTable(table).compile(dialect=used_dialect)))
-
+        file.write(";\n")
 
 indices_ex_7:list[tuple[Index,str]] = [
     (
