@@ -1,5 +1,3 @@
-import dis
-from importlib import metadata
 from typing import Any, List
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.dialects import postgresql
@@ -10,7 +8,7 @@ from faked_relations import *
 with open("scripts-sql/populate.sql", "w") as sqlfile:
     insert_objects: List[List[Any]] = []
     insert_objects.append(unidades_escolas:=fake_unidade_escola(10))
-    insert_objects.append(usuarios:=fake_usuario(1000))
+    insert_objects.append(usuarios:=fake_usuario(10_000))
     insert_objects.append(professores:=fake_professor(usuarios))
     insert_objects.append(alunos:=fake_aluno(usuarios))
     insert_objects.append(funcionarios_administrativos:=fake_funcionario_administrativo(usuarios))

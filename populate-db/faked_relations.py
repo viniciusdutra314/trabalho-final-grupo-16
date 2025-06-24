@@ -1,4 +1,3 @@
-import re
 from typing import List
 from faker import Faker
 import sys
@@ -14,16 +13,24 @@ import random
 faker = Faker('pt_BR')
 
 def fake_unidade_escola(N: int = 10) -> List[UnidadeEscola]:
-    return [UnidadeEscola(id_unidade=i+1,
+    unidades_escola:List[UnidadeEscola] = []
+    for i in range(N):
+
+        unidades_escola.append(
+            UnidadeEscola(id_unidade=i+1,
         cidade=faker.city(),
         estado=faker.estado_sigla(),
         pais='Brasil',
         predio=faker.word(),
         bloco=faker.random_letter()
-    ) for i in range(N)]
+        ))
+    return unidades_escola
 
 def fake_usuario(N: int = 20) -> List[Usuário]:
-    return [Usuário(
+    usuarios:List[Usuário] = []
+    for i in range(N):
+
+        usuarios.append(Usuário(
         id=i+1,
         nome=faker.first_name(),
         sobrenome=faker.last_name(),
@@ -32,9 +39,9 @@ def fake_usuario(N: int = 20) -> List[Usuário]:
         sexo=random.choice(['M', 'F']),
         numero_de_telefone=faker.phone_number(),
         email=faker.email(),
-        senha=faker.password(),
-        tipo_usuario=random.choice([x.value for x in Usuário.TiposUsuarioEnum])
-    ) for i in range(N)]
+        senha=faker.password(length=16),
+        tipo_usuario=random.choice([x.value for x in Usuário.TiposUsuarioEnum])))
+    return usuarios
 
 def fake_aluno(usuarios:list[Usuário]) -> List[Aluno]:
     usuarios_alunos  =filter(lambda x: x.tipo_usuario == Usuário.TiposUsuarioEnum.Aluno.value, usuarios)
