@@ -213,12 +213,10 @@ def fake_curso_requer_infraestrutura(cursos:List[Curso],infraestruturas:list[Inf
 
 
 
-
 def fake_disciplina_professores_responsaveis(disciplinas:list[Disciplina],professores:list[Professor]) -> List[DisciplinaProfessoresResponsaveis]:
     professores_responsaveis: list[DisciplinaProfessoresResponsaveis] = []
-    num_professores=len(professores)
     for disciplina in disciplinas:
-        qtd_professores= random.randint(1, num_professores // 10)
+        qtd_professores= random.randint(1,3)
         for professor in random.sample(professores, qtd_professores):
             professores_responsaveis.append(DisciplinaProfessoresResponsaveis(
                 id_disciplina=disciplina.id,
