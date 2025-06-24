@@ -1,3 +1,4 @@
+import re
 from typing import List
 from faker import Faker
 import sys
@@ -246,15 +247,26 @@ def fake_matricula(alunos:list[Aluno]) -> List[Matricula]:
         ))
     return matriculas
 
-def fake_matricula_turma(N: int = 10) -> List[MatriculaTurma]:
-    return [MatriculaTurma(
-        id_matricula=random.randint(1, 10),
-        id_disciplina=random.randint(1, 10)
-    ) for _ in range(N)]
+def fake_matricula_disciplina(matriculas:list[Matricula],disciplinas:list[Disciplina]) -> List[MatriculaDisciplina]:
+    matricula_turmas: List[MatriculaDisciplina] = []
+    id=0
+    for matricula in matriculas:
+        num_disciplinas= random.randint(3,10 )
+        disciplinas_escolhidas= random.sample(disciplinas, num_disciplinas)
+        for disciplina in disciplinas_escolhidas:
+            id+=1
+            matricula_turmas.append(MatriculaDisciplina(
+                id,
+                id_matricula=matricula.id_matricula,
+                id_disciplina=disciplina.id
+            ))
+    return matricula_turmas
 
-def fake_notas(N: int = 10) -> List[Notas]:
-    return [Notas(
-        disciplina_id=random.randint(1, 10),
-        matricula_id=random.randint(1, 10),
-        nota=round(random.uniform(0, 10), 2)
-    ) for _ in range(N)]
+def fake_notas(matricula_disciplinas:list[MatriculaDisciplina]) -> List[Notas]:
+    notas:list[Notas]=[]
+    for matricula_disciplina in matricula_disciplinas:
+        notas.append(Notas(
+            id_matricula_disciplina=matricula_disciplina.id,
+            nota=round(random.uniform(0, 10), 2)
+        ))
+    return notas

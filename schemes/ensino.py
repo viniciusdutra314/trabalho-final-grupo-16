@@ -168,8 +168,6 @@ class DisciplinaProfessoresResponsaveis(Database):
     )
 
 
-
-
 class Turma(Database):
     __tablename__="turma"
     id:Mapped[int]=mapped_column(Integer,primary_key=True,autoincrement=True)
@@ -208,13 +206,18 @@ class Matricula(Database):
     data_limite:Mapped[datetime.date]=mapped_column(Date,nullable=False)
     
 
-class MatriculaTurma(Database):
-    __tablename__ = "matricula_turma"
-    id_matricula:Mapped[int]=mapped_column(Integer,ForeignKey(Matricula.id_matricula),primary_key=True)
-    id_disciplina:Mapped[int]=mapped_column(Integer,ForeignKey(Disciplina.id),primary_key=True)
-
+class MatriculaDisciplina(Database):
+    __tablename__ = "matricula_disciplina"
+    id:Mapped[int]=mapped_column(Integer,primary_key=True,autoincrement=True)
+    id_matricula:Mapped[int]=mapped_column(Integer,ForeignKey(Matricula.id_matricula))
+    id_disciplina:Mapped[int]=mapped_column(Integer,ForeignKey(Disciplina.id))
+    __table_args__=(
+        UniqueConstraint(
+            "id_matricula",
+            "id_disciplina",
+        ),
+    )
 class Notas(Database):
     __tablename__ = "notas"
-    disciplina_id:Mapped[int]=mapped_column(Integer,ForeignKey(Disciplina.id),primary_key=True)
-    matricula_id:Mapped[int]=mapped_column(Integer,ForeignKey(Matricula.id_matricula),primary_key=True)
+    id_matricula_disciplina:Mapped[int]=mapped_column(Integer,ForeignKey(MatriculaDisciplina.id),primary_key=True)
     nota:Mapped[float]=mapped_column(Float)
