@@ -8,7 +8,7 @@ from faked_relations import *
 with open("scripts-sql/populate.sql", "w") as sqlfile:
     insert_objects: List[List[Any]] = []
     insert_objects.append(unidades_escolas:=fake_unidade_escola(10))
-    insert_objects.append(usuarios:=fake_usuario(10_000))
+    insert_objects.append(usuarios:=fake_usuario(1_000))
     insert_objects.append(professores:=fake_professor(usuarios))
     insert_objects.append(alunos:=fake_aluno(usuarios))
     insert_objects.append(funcionarios_administrativos:=fake_funcionario_administrativo(usuarios))
@@ -16,9 +16,9 @@ with open("scripts-sql/populate.sql", "w") as sqlfile:
     num_salas= len(unidades_escolas) * 30
     insert_objects.append(salas:=fake_sala(unidades_escolas,num_salas))
     insert_objects.append(cursos:=fake_curso(unidades_escolas, departamentos_academicos))
-    insert_objects.append(disciplinas:=fake_disciplina(unidades_escolas,len(unidades_escolas)*10))
+    insert_objects.append(disciplinas:=fake_disciplina(unidades_escolas,salas,len(salas)*10))
 
-    insert_objects.append(aviso:=fake_aviso())
+    insert_objects.append(aviso:=fake_aviso(100))
     insert_objects.append(mensagens:=fake_mensagem())
     insert_objects.append(mensagem_destinatarios:=fake_mensagem_destinatario(mensagens))
     insert_objects.append(professores_responsaveis:=fake_disciplina_professores_responsaveis(disciplinas, professores))

@@ -79,7 +79,16 @@ def fake_departamento_academico(possiveis_chefes:list[Professor]) -> List[Depart
     for id,chefe in enumerate(chefes):
         departamentos_academicos.append(DepartamentoAcademico(
             codigo=id+1,
-            nome=faker.company(),
+            nome=random.choice(['Departamento de Ciências Exatas',
+                                'Departamento de Ciências Humanas',
+                                'Departamento de Ciências Biológicas',
+                                'Departamento de Engenharia',
+                                'Departamento de Artes',
+                                'Departamento de Educação',
+                                'Departamento de Saúde',
+                                'Departamento de Tecnologia',
+                                'Departamento de Administração',
+                                'Departamento de Direito']),
             chefe_id=chefe.id
         ))
     return departamentos_academicos
@@ -140,13 +149,15 @@ def fake_curso(unidade_escola:list[UnidadeEscola],
         sala=None
     ) for i in range(100)]
 
-def fake_disciplina(unidades_escolas:list[UnidadeEscola],N:int) -> List[Disciplina]:
+def fake_disciplina(unidades_escolas:list[UnidadeEscola],
+                    salas:list[Sala],
+                    N:int) -> List[Disciplina]:
     return [Disciplina(
         unidade_escola=str(random.choice(unidades_escolas).id_unidade),
         id=i+1,
         qtd_aulas_semanais=faker.random_int(min=1, max=3),
         material_didatico_basico=faker.word(),
-        sala=None,
+        sala=random.choice(salas).id,
     ) for i in range(N)]
 
 def fake_curso_requisitos(N: int = 10) -> List[CursoRequisitos]:
