@@ -1,0 +1,1 @@
+CREATE INDEX ix_usuario_email ON usuario (email)

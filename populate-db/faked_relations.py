@@ -1,11 +1,12 @@
+from typing import List
+from faker import Faker
 import sys
-sys.path.append('..')
+import os
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(project_root)
 from schemes.administracao import *
 from schemes.comunicacao import *
 from schemes.ensino import *
-
-from typing import List
-from faker import Faker
 import random
 
 faker = Faker('pt_BR')
@@ -97,6 +98,20 @@ def fake_disciplina() -> List[Disciplina]:
         sala=random.randint(1, 10)
     ) for i in range(10)]
 
+def fake_curso_requisitos() -> List[CursoRequisitos]:
+    from sqlalchemy import Integer as SQLAInteger
+    return [CursoRequisitos(
+        id_curso=SQLAInteger(),
+        id_curso_requisito=SQLAInteger()
+    ) for _ in range(10)]
+
+def fake_curso_disciplina_requerida() -> List[CursoDisciplinaRequerida]:
+    from sqlalchemy import Integer as SQLAInteger
+    return [CursoDisciplinaRequerida(
+        id_curso=SQLAInteger(),
+        id_disciplina=random.randint(1, 10)
+    ) for _ in range(10)]
+
 def fake_regras() -> List[Regras]:
     return [Regras(
         id=i+1,
@@ -117,9 +132,9 @@ def fake_infraestrutura() -> List[Infraestrutura]:
 
 def fake_curso_requer_infraestrutura() -> List[CursoRequerInfraestrutura]:
     return [CursoRequerInfraestrutura(
-        id_curso=i,
+        id_curso=random.randint(1, 10),
         id_infraestrutura=random.randint(1, 10)
-    ) for i in range(10)]
+    ) for _ in range(10)]
 
 def fake_aluno() -> List[Aluno]:
     return [Aluno(
@@ -138,8 +153,8 @@ def fake_professor() -> List[Professor]:
 def fake_disciplina_professores_responsaveis() -> List[DisciplinaProfessoresResponsaveis]:
     return [DisciplinaProfessoresResponsaveis(
         id_disciplina=random.randint(1, 10),
-        professor_id=i
-    ) for i in range(10)]
+        professor_id=random.randint(1, 10)
+    ) for _ in range(10)]
 
 def fake_turma() -> List[Turma]:
     return [Turma(

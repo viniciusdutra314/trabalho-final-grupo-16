@@ -1,28 +1,28 @@
 
 CREATE TABLE aviso (
-	id INTEGER NOT NULL, 
+	id SERIAL NOT NULL, 
 	texto VARCHAR NOT NULL, 
-	timestamp_criacao DATETIME NOT NULL, 
+	timestamp_criacao TIMESTAMP WITHOUT TIME ZONE NOT NULL, 
 	PRIMARY KEY (id)
 )
 
 
 CREATE TABLE infraestrutura (
-	id INTEGER NOT NULL, 
+	id SERIAL NOT NULL, 
 	descricao VARCHAR NOT NULL, 
 	PRIMARY KEY (id)
 )
 
 
 CREATE TABLE regras (
-	id INTEGER NOT NULL, 
+	id SERIAL NOT NULL, 
 	descricao VARCHAR NOT NULL, 
 	PRIMARY KEY (id)
 )
 
 
 CREATE TABLE unidade_escola (
-	id_unidade INTEGER NOT NULL, 
+	id_unidade SERIAL NOT NULL, 
 	cidade VARCHAR NOT NULL, 
 	estado VARCHAR NOT NULL, 
 	pais VARCHAR NOT NULL, 
@@ -33,7 +33,7 @@ CREATE TABLE unidade_escola (
 
 
 CREATE TABLE usuario (
-	id INTEGER NOT NULL, 
+	id SERIAL NOT NULL, 
 	nome VARCHAR NOT NULL, 
 	sobrenome VARCHAR NOT NULL, 
 	data_de_nascimento DATE NOT NULL, 
@@ -42,7 +42,7 @@ CREATE TABLE usuario (
 	numero_de_telefone VARCHAR(15) NOT NULL, 
 	email VARCHAR NOT NULL, 
 	senha VARCHAR NOT NULL, 
-	tipo_usuario VARCHAR(25) NOT NULL, 
+	tipo_usuario tiposusuarioenum NOT NULL, 
 	PRIMARY KEY (id), 
 	CONSTRAINT unicidade_nome_sobrenome_telefone UNIQUE (nome, sobrenome, numero_de_telefone)
 )
@@ -65,9 +65,9 @@ CREATE TABLE funcionario_administrativo (
 
 
 CREATE TABLE mensagem (
-	id INTEGER NOT NULL, 
+	id SERIAL NOT NULL, 
 	remetente_id INTEGER NOT NULL, 
-	timestamp_criacao DATETIME NOT NULL, 
+	timestamp_criacao TIMESTAMP WITHOUT TIME ZONE NOT NULL, 
 	texto VARCHAR NOT NULL, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(remetente_id) REFERENCES usuario (id)
@@ -86,7 +86,7 @@ CREATE TABLE professor (
 
 
 CREATE TABLE sala (
-	id INTEGER NOT NULL, 
+	id SERIAL NOT NULL, 
 	unidade_escola INTEGER NOT NULL, 
 	numero INTEGER NOT NULL, 
 	capacidade INTEGER NOT NULL, 
@@ -97,7 +97,7 @@ CREATE TABLE sala (
 
 
 CREATE TABLE departamento_academico (
-	codigo INTEGER NOT NULL, 
+	codigo SERIAL NOT NULL, 
 	nome VARCHAR NOT NULL, 
 	chefe_id INTEGER NOT NULL, 
 	PRIMARY KEY (codigo), 
@@ -107,7 +107,7 @@ CREATE TABLE departamento_academico (
 
 CREATE TABLE disciplina (
 	unidade_escola INTEGER NOT NULL, 
-	id INTEGER NOT NULL, 
+	id SERIAL NOT NULL, 
 	qtd_aulas_semanais INTEGER NOT NULL, 
 	material_didatico_basico VARCHAR NOT NULL, 
 	sala INTEGER, 
@@ -118,10 +118,10 @@ CREATE TABLE disciplina (
 
 
 CREATE TABLE matricula (
-	id_matricula INTEGER NOT NULL, 
+	id_matricula SERIAL NOT NULL, 
 	id_aluno INTEGER NOT NULL, 
 	data_efetivacao DATE NOT NULL, 
-	status_matricula VARCHAR(9) NOT NULL, 
+	status_matricula statusmatriculaenum NOT NULL, 
 	bolsa_ou_desconto FLOAT NOT NULL, 
 	data_limite DATE NOT NULL, 
 	PRIMARY KEY (id_matricula), 
@@ -139,7 +139,7 @@ CREATE TABLE mensagem_destinatario (
 
 
 CREATE TABLE avaliacao (
-	id INTEGER NOT NULL, 
+	id SERIAL NOT NULL, 
 	aluno_id INTEGER NOT NULL, 
 	disciplina_id INTEGER NOT NULL, 
 	comentario VARCHAR NOT NULL, 
@@ -154,12 +154,12 @@ CREATE TABLE avaliacao (
 
 
 CREATE TABLE curso (
-	id INTEGER NOT NULL, 
+	id SERIAL NOT NULL, 
 	unidade_escola INTEGER NOT NULL, 
 	codigo VARCHAR NOT NULL, 
 	nome VARCHAR NOT NULL, 
 	departamento_academico INTEGER NOT NULL, 
-	nivel_ensino VARCHAR(11) NOT NULL, 
+	nivel_ensino nivelensinoenum NOT NULL, 
 	carga_horaria_total INTEGER NOT NULL, 
 	numero_vagas INTEGER NOT NULL, 
 	ementa VARCHAR NOT NULL, 
@@ -200,7 +200,7 @@ CREATE TABLE notas (
 
 
 CREATE TABLE turma (
-	id INTEGER NOT NULL, 
+	id SERIAL NOT NULL, 
 	id_disciplina INTEGER NOT NULL, 
 	capacidade INTEGER NOT NULL, 
 	periodo_letivo VARCHAR NOT NULL, 
