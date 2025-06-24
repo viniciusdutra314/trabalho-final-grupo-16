@@ -7,21 +7,6 @@ CREATE TABLE aviso (
 )
 
 
-CREATE TABLE departamento_academico (
-	codigo INTEGER NOT NULL, 
-	nome VARCHAR NOT NULL, 
-	PRIMARY KEY (codigo)
-)
-
-
-CREATE TABLE disciplina (
-	id INTEGER NOT NULL, 
-	qtd_aulas_semanais INTEGER NOT NULL, 
-	material_didatico_basico VARCHAR NOT NULL, 
-	PRIMARY KEY (id)
-)
-
-
 CREATE TABLE infraestrutura (
 	id INTEGER NOT NULL, 
 	descricao VARCHAR NOT NULL, 
@@ -65,8 +50,10 @@ CREATE TABLE usuario (
 
 CREATE TABLE aluno (
 	usuario_id INTEGER NOT NULL, 
+	unidade_escola INTEGER NOT NULL, 
 	PRIMARY KEY (usuario_id), 
-	FOREIGN KEY(usuario_id) REFERENCES usuario (id)
+	FOREIGN KEY(usuario_id) REFERENCES usuario (id), 
+	FOREIGN KEY(unidade_escola) REFERENCES unidade_escola (id_unidade)
 )
 
 
@@ -87,20 +74,14 @@ CREATE TABLE mensagem (
 )
 
 
-CREATE TABLE notas (
-	id_disciplina INTEGER NOT NULL, 
-	nota FLOAT NOT NULL, 
-	PRIMARY KEY (id_disciplina, nota), 
-	FOREIGN KEY(id_disciplina) REFERENCES disciplina (id)
-)
-
-
 CREATE TABLE professor (
 	id INTEGER NOT NULL, 
 	area_especializacao VARCHAR NOT NULL, 
 	titulacao VARCHAR NOT NULL, 
+	unidade_escola INTEGER NOT NULL, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(id) REFERENCES usuario (id)
+	FOREIGN KEY(id) REFERENCES usuario (id), 
+	FOREIGN KEY(unidade_escola) REFERENCES unidade_escola (id_unidade)
 )
 
 
@@ -112,6 +93,48 @@ CREATE TABLE sala (
 	PRIMARY KEY (id), 
 	UNIQUE (unidade_escola, numero), 
 	FOREIGN KEY(unidade_escola) REFERENCES unidade_escola (id_unidade)
+)
+
+
+CREATE TABLE departamento_academico (
+	codigo INTEGER NOT NULL, 
+	nome VARCHAR NOT NULL, 
+	chefe_id INTEGER NOT NULL, 
+	PRIMARY KEY (codigo), 
+	FOREIGN KEY(chefe_id) REFERENCES professor (id)
+)
+
+
+CREATE TABLE disciplina (
+	unidade_escola INTEGER NOT NULL, 
+	id INTEGER NOT NULL, 
+	qtd_aulas_semanais INTEGER NOT NULL, 
+	material_didatico_basico VARCHAR NOT NULL, 
+	sala INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(unidade_escola) REFERENCES unidade_escola (id_unidade), 
+	FOREIGN KEY(sala) REFERENCES sala (id)
+)
+
+
+CREATE TABLE matricula (
+	id_matricula INTEGER NOT NULL, 
+	id_aluno INTEGER NOT NULL, 
+	data_efetivacao DATE NOT NULL, 
+	status_matricula VARCHAR(9) NOT NULL, 
+	bolsa_ou_desconto FLOAT NOT NULL, 
+	data_limite DATE NOT NULL, 
+	PRIMARY KEY (id_matricula), 
+	FOREIGN KEY(id_aluno) REFERENCES aluno (usuario_id)
+)
+
+
+CREATE TABLE mensagem_destinatario (
+	mensagem_id INTEGER NOT NULL, 
+	destinatario_id INTEGER NOT NULL, 
+	PRIMARY KEY (mensagem_id, destinatario_id), 
+	FOREIGN KEY(mensagem_id) REFERENCES mensagem (id), 
+	FOREIGN KEY(destinatario_id) REFERENCES usuario (id)
 )
 
 
@@ -132,6 +155,7 @@ CREATE TABLE avaliacao (
 
 CREATE TABLE curso (
 	id INTEGER NOT NULL, 
+	unidade_escola INTEGER NOT NULL, 
 	codigo VARCHAR NOT NULL, 
 	nome VARCHAR NOT NULL, 
 	departamento_academico INTEGER NOT NULL, 
@@ -139,8 +163,9 @@ CREATE TABLE curso (
 	carga_horaria_total INTEGER NOT NULL, 
 	numero_vagas INTEGER NOT NULL, 
 	ementa VARCHAR NOT NULL, 
-	sala INTEGER NOT NULL, 
+	sala INTEGER, 
 	PRIMARY KEY (id), 
+	FOREIGN KEY(unidade_escola) REFERENCES unidade_escola (id_unidade), 
 	FOREIGN KEY(departamento_academico) REFERENCES departamento_academico (codigo), 
 	FOREIGN KEY(sala) REFERENCES sala (id)
 )
@@ -155,24 +180,22 @@ CREATE TABLE disciplina_professor (
 )
 
 
-CREATE TABLE matricula (
+CREATE TABLE matricula_turma (
 	id_matricula INTEGER NOT NULL, 
-	id_aluno INTEGER NOT NULL, 
-	data_efetivacao DATE NOT NULL, 
-	status_matricula VARCHAR(9) NOT NULL, 
-	bolsa_ou_descononto FLOAT NOT NULL, 
-	data_limite DATE NOT NULL, 
-	PRIMARY KEY (id_matricula), 
-	FOREIGN KEY(id_aluno) REFERENCES aluno (usuario_id)
+	id_disciplina INTEGER NOT NULL, 
+	PRIMARY KEY (id_matricula, id_disciplina), 
+	FOREIGN KEY(id_matricula) REFERENCES matricula (id_matricula), 
+	FOREIGN KEY(id_disciplina) REFERENCES disciplina (id)
 )
 
 
-CREATE TABLE mensagem_destinatario (
-	mensagem_id INTEGER NOT NULL, 
-	destinatario_id INTEGER NOT NULL, 
-	PRIMARY KEY (mensagem_id, destinatario_id), 
-	FOREIGN KEY(mensagem_id) REFERENCES mensagem (id), 
-	FOREIGN KEY(destinatario_id) REFERENCES usuario (id)
+CREATE TABLE notas (
+	disciplina_id INTEGER NOT NULL, 
+	matricula_id INTEGER NOT NULL, 
+	nota FLOAT NOT NULL, 
+	PRIMARY KEY (disciplina_id, matricula_id), 
+	FOREIGN KEY(disciplina_id) REFERENCES disciplina (id), 
+	FOREIGN KEY(matricula_id) REFERENCES matricula (id_matricula)
 )
 
 
@@ -189,46 +212,37 @@ CREATE TABLE turma (
 
 
 CREATE TABLE curso_disciplina_requerida (
-	id_curso VARCHAR NOT NULL, 
+	id_curso INTEGER NOT NULL, 
 	id_disciplina INTEGER NOT NULL, 
 	PRIMARY KEY (id_curso, id_disciplina), 
-	FOREIGN KEY(id_curso) REFERENCES curso (codigo), 
+	FOREIGN KEY(id_curso) REFERENCES curso (id), 
 	FOREIGN KEY(id_disciplina) REFERENCES disciplina (id)
 )
 
 
 CREATE TABLE curso_requer_infraestrutura (
-	id_curso VARCHAR NOT NULL, 
+	id_curso INTEGER NOT NULL, 
 	id_infraestrutura INTEGER NOT NULL, 
 	PRIMARY KEY (id_curso, id_infraestrutura), 
-	FOREIGN KEY(id_curso) REFERENCES curso (codigo), 
+	FOREIGN KEY(id_curso) REFERENCES curso (id), 
 	FOREIGN KEY(id_infraestrutura) REFERENCES infraestrutura (id)
 )
 
 
 CREATE TABLE curso_requisitos (
-	id_curso VARCHAR NOT NULL, 
-	id_curso_requisito VARCHAR NOT NULL, 
+	id_curso INTEGER NOT NULL, 
+	id_curso_requisito INTEGER NOT NULL, 
 	PRIMARY KEY (id_curso, id_curso_requisito), 
-	FOREIGN KEY(id_curso) REFERENCES curso (codigo), 
-	FOREIGN KEY(id_curso_requisito) REFERENCES curso (codigo)
-)
-
-
-CREATE TABLE matricula_turma (
-	id_matricula INTEGER NOT NULL, 
-	id_disciplina INTEGER NOT NULL, 
-	PRIMARY KEY (id_matricula, id_disciplina), 
-	FOREIGN KEY(id_matricula) REFERENCES matricula (id_matricula), 
-	FOREIGN KEY(id_disciplina) REFERENCES disciplina (id)
+	FOREIGN KEY(id_curso) REFERENCES curso (id), 
+	FOREIGN KEY(id_curso_requisito) REFERENCES curso (id)
 )
 
 
 CREATE TABLE regras_curso (
 	id_regra INTEGER NOT NULL, 
-	codigo_curso VARCHAR NOT NULL, 
+	codigo_curso INTEGER NOT NULL, 
 	PRIMARY KEY (id_regra, codigo_curso), 
 	FOREIGN KEY(id_regra) REFERENCES regras (id), 
-	FOREIGN KEY(codigo_curso) REFERENCES curso (codigo)
+	FOREIGN KEY(codigo_curso) REFERENCES curso (id)
 )
 

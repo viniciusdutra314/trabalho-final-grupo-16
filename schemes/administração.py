@@ -22,6 +22,8 @@ class DepartamentoAcademico(Database):
                            primary_key=True,autoincrement=True)
     nome:Mapped[str] = mapped_column(String, 
                                      nullable=False)
+    chefe_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey("professor.id"), nullable=False)
 
 
 class FuncionarioAdministrativo(Database):
