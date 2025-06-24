@@ -1,4 +1,4 @@
-from ensino import *
+from schemes.ensino import *
 from sqlalchemy import  PrimaryKeyConstraint
 
 class Aviso(Database):

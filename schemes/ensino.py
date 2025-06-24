@@ -1,5 +1,4 @@
-from numbers import Integral
-from administração import *
+from schemes.administracao import *
 
 
 class Sala(Database):
