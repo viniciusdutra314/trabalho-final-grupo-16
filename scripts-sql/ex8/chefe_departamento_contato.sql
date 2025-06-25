@@ -10,3 +10,4 @@ SELECT
 FROM departamento_academico da
 JOIN professor p ON da.chefe_id = p.id
 JOIN usuario u ON p.id = u.id;
+SELECT * FROM vw_chefes_departamento_contato;

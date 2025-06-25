@@ -11,3 +11,4 @@ FROM turma t
 JOIN disciplina d ON t.id_disciplina = d.id
 JOIN sala s ON t.sala_id = s.id
 JOIN unidade_escola ue ON s.unidade_escola = ue.id_unidade;
+SELECT * FROM vw_turmas_disciplinas_salas;
