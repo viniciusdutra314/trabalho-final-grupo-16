@@ -1,0 +1,142 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36" version="27.1.6">
+  <diagram name="Page-1" id="-lIQt4gx_VddKIuZdTz9">
+    <mxGraphModel dx="2593" dy="1413" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="wN76u7R-MLizJoVynKuO-1" value="Aviso = { &lt;u&gt;id&lt;/u&gt;, texto, timestamp_criacao }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-2" value="Infraestrutura = { &lt;u&gt;id&lt;/u&gt;, descricao}" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="310" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-3" value="Regras = { &lt;u&gt;id&lt;/u&gt;, descricao}" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="380" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-4" value="Unidade_Escola = { &lt;u&gt;id_unidade&lt;/u&gt;, cidade, estado, pais, predio, bloco}" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="460" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-5" value="Usuario = { &lt;u&gt;id&lt;/u&gt;, nome, sobrenome, data_de_nascimento, endereço, sexo, numero_de_telefone, email, senha, tipo_usuario }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="530" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-6" value="Aluno = { &lt;u&gt;id&lt;/u&gt;, nome, sobrenome, data_de_nascimento, endereço, sexo, numero_de_telefone, email, senha, tipo_usuario, unidade_escola&amp;nbsp;}" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="600" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-7" value="FuncionarioAdministrativo = { &lt;u&gt;id&lt;/u&gt;, nome, sobrenome, data_de_nascimento, endereço, sexo, numero_de_telefone, email, senha, tipo_usuario}" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="670" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-8" value="Mensagem = { &lt;u&gt;id&lt;/u&gt;, remetente_id, timestamp_criacao, texto }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="820" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-9" value="Professor = { &lt;u&gt;id&lt;/u&gt;, nome, sobrenome, data_de_nascimento, endereço, sexo, numero_de_telefone, email, senha, tipo_usuario, area_especializacao, titulacao, unidade_escola }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="740" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-11" value="Sala = { &lt;u&gt;id&lt;/u&gt;, unidade_escola, numero, capacidade }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="900" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-12" value="DepartamentoAcademico = { &lt;u&gt;codigo&lt;/u&gt;, nome, chefe_id }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="980" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-13" value="Disciplina = { &lt;u&gt;id&lt;/u&gt;, unidade_escola, qtd_aulas_semanais, material_didatico_basico, sala }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1060" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-14" value="Matricula = { &lt;u&gt;id_matricula&lt;/u&gt;, id_aluno, data_efetivacao, status_matricula, bolsa_ou_desconto, data_limite }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1140" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-15" value="Mensagem_Destinatario = { &lt;u&gt;mensagem_id, destinatario_id&lt;/u&gt; }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1220" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-16" value="Avaliacao = { &lt;u&gt;id&lt;/u&gt;, aluno_id, disciplina_id, comentario, nota_didatica, nota_material_de_apoio, nota_relevancia_do_conteudo, nota_infraestrutura}" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1300" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-17" value="Curso = { &lt;u&gt;id&lt;/u&gt;, unidade_escola, codigo, nome, departamento_academico, nivel_ensino, carga_horaria_total, numero_vagas, ementa, sala }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1380" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-18" value="Disciplina_Professor = { &lt;u&gt;id_disciplina, professor_id&lt;/u&gt; }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1460" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-19" value="Matricula_Disciplina = { &lt;u&gt;id&lt;/u&gt;, id_matricula, id_disciplina }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="240" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-20" value="Turma = { &lt;u&gt;id&lt;/u&gt;, id_disciplina, capacidade, periodo_letivo, sala_id }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="320" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-21" value="Curso_Disciplina_Requerida = {&lt;u&gt; id_curso, id_disciplina&lt;/u&gt; }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="400" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-22" value="Curso_Requer_Infraestrutura = { &lt;u&gt;id_curso, id_infraestrutura&lt;/u&gt; }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="490" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-23" value="Curso_Requisitos = { &lt;u&gt;id_curso, id_curso_requisito&lt;/u&gt; }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="570" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-25" value="Notas = { &lt;u&gt;id_matricula_disciplina&lt;/u&gt;, nota }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="650" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-26" value="Regras_Curso = { &lt;u&gt;id_regra, codigo_curso&lt;/u&gt; }" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="730" width="390" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-27" value="Aluno( unidade_escola ) -&amp;gt; Unidade_Escola( id_unidade )" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="615" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-29" value="Professor( unidade_escola ) -&amp;gt; Unidade_Escola( id_unidade )" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="755" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-30" value="FuncionarioAdministrativo( unidade_escola ) -&amp;gt; Unidade_Escola( id_unidade )" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="685" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-31" value="Mensagem( remetente_id ) -&amp;gt; Usuario( id )" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="835" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-33" value="Sala( unidade_escola ) -&amp;gt; Unidade_Escola( id_unidade )" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="915" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-34" value="DepartamentoAcademico( chefe_id ) -&amp;gt; Professor( id )" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="995" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-35" value="Disciplina( unidade_escola ) -&amp;gt; Unidade_Escola( id_unidade )" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1075" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-36" value="Matricula( id_aluno ) -&amp;gt; Aluno( id )" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1150" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-37" value="Mensagem_Destinatario( mensagem_id ) -&amp;gt; Mensagem( id )&lt;div&gt;Mensagem_Destinatario( destinatario_id ) -&amp;gt; Usuario( id )&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1235" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-38" value="Avaliacao( aluno_id ) -&amp;gt; Aluno ( id )&lt;div&gt;Avaliacao( disciplina_id ) -&amp;gt; Disciplina ( id )&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1315" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-39" value="Curso( unidade_escola ) -&amp;gt; Unidade_Escola ( id_unidade )&lt;div&gt;Curso( departamento_academico ) -&amp;gt; Departamento_Academico( codigo )&lt;/div&gt;&lt;div&gt;Curso( sala ) -&amp;gt; Sala( id )&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1395" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-40" value="Disciplina_Professor( id_matricula ) -&amp;gt; Matricula( id_matricula )&lt;div&gt;Disciplina_Professor( id_disciplina ) -&amp;gt; Disciplina( id )&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1475" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-41" value="Matricula_Disciplina( id_matricula ) -&amp;gt; Matricula( id_matricula )&lt;div&gt;Matricula_Disciplina( id_disciplina ) -&amp;gt; Disciplina( id )&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1570" y="255" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-42" value="Turma( id_disciplina ) -&amp;gt; Disciplina( id )&lt;div&gt;Turma( sala_id ) -&amp;gt; Sala( id )&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1570" y="335" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-43" value="Curso_Disciplina_Requerida( id_curso ) -&amp;gt; Curso( id )&lt;div&gt;Curso_Disciplina_Requerida( id_disciplina ) -&amp;gt; Disciplina( id )&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1570" y="415" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-44" value="Curso_Requer_Infraestrutura( id_curso ) -&amp;gt; Curso( id )&lt;div&gt;Curso_Requer_Infraestrutura( id_infraestrutura ) -&amp;gt; Infraestrutura id )&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1580" y="505" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-45" value="Curso_Requisitos( id_curso ) -&amp;gt; Curso( id )&lt;div&gt;Curso_Requisitos( id_curso_requisito ) -&amp;gt; Curso( id )&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1580" y="585" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-46" value="Notas( id_matricula_disciplina ) -&amp;gt; Matricula_Disciplina( id )" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1580" y="665" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-47" value="Regras_Curso( id_regra ) -&amp;gt; Regras( id )&lt;div&gt;Regras_Curso( codigo_curso ) -&amp;gt; Curso( id )&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1580" y="745" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wN76u7R-MLizJoVynKuO-48" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Diagrama Entidade-Relacionamento Extendido&lt;br&gt;Exercício 3 - Trabalho final de BD - Grupo 16&lt;/h1&gt;&lt;p&gt;Alunos:&lt;br&gt;Carolina Souza Gomes - casouzagomes@usp.br - 13687690&lt;br&gt;Breno Henrique Pelegrin da Silva - breno.pelegrin@usp.br - 13687303&lt;br&gt;Vinicius Sousa Dutra - dutravinisousa2@usp.br - 13686257 (representante)&lt;br&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="680" height="140" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
