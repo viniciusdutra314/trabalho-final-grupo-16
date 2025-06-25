@@ -2,8 +2,6 @@
 /data
 *.db
 *.sqlite3
-*populate.sql
-*generated_schema.sql
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

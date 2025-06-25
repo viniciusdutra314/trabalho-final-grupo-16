@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from faked_relations import *
 
-with open("scripts-sql/populate.sql", "w") as sqlfile:
+with open("scripts-sql/ex4/populate.sql", "w") as sqlfile:
     insert_objects: List[List[Any]] = []
     insert_objects.append(unidades_escolas:=fake_unidade_escola(10))
     insert_objects.append(usuarios:=fake_usuario(1_000))

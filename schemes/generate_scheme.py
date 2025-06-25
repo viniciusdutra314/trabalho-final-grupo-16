@@ -12,7 +12,7 @@ from schemes.ensino import Usuário, Matricula, Curso
 used_dialect = postgresql.dialect()
 
 
-with open("scripts-sql/generated_schema.sql", "w") as file:
+with open("scripts-sql/ex6/generated_schema.sql", "w") as file:
     for table in Database.metadata.sorted_tables:
         file.write(str(CreateTable(table).compile(dialect=used_dialect)))
         file.write(";\n")
